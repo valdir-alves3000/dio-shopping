@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cartActions from "../store/actions/cart";
-import { Modal, Button } from "@material-ui/core";
+import {
+  Modal,
+  Button,
+  Box,
+  Grid,
+  Typography,
+  Paper,
+  TableContainer,
+  TableRow,
+  TableCell,
+  TableHead,
+  Table,
+  TableBody,
+} from "@material-ui/core";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import CloseIcon from "@material-ui/icons/Close";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -17,133 +32,148 @@ const Cart = () => {
     localStorage.setItem("dioshopping: cart", JSON.stringify(cart));
   }
 
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <Button
+        onClick={handleOpen}
         type="button"
         className="btn btn-info"
         data-bs-toggle="modal"
         data-bs-target="#CartModal"
       >
-        <span>
-          <i className="fas fa-shopping-cart"></i>
-        </span>
-        <span className="badge rounded-pill bg-info text-dark">
-          {cart.value}
-        </span>
+        <Box>
+          <ShoppingCartIcon style={{ color: "#fff" }} />
+        </Box>
+        <Box style={{ color: "#fff", paddingLeft: 7 }}>{cart.value}</Box>
       </Button>
 
       {/* Modal */}
-      <Modal
-        className="modal fade"
-        id="CartModal"
-        tabIndex="-1"
-        aria-labelledby="CartModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="CartModalLabel">
+      <Modal open={open} onClose={handleClose}>
+        <Box
+          style={{
+            width: 600,
+            marginTop: 100,
+            marginLeft: "auto",
+            marginRight: 50,
+          }}
+        >
+          <Box className="modal-content">
+            <Grid container direction="column" alignItems="flex-end">
+              <Typography style={{ color: "#fff" }} id="CartModalLabel">
                 Meu Carrinho
-              </h5>
-              <button
+              </Typography>
+              <Button
                 type="button"
                 className="close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
+                onClick={handleClose}
               >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
+                <CloseIcon style={{ color: "#fff" }} />
+              </Button>
+            </Grid>
 
-            <div className="modal-body table-responsive">
-              <table className="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col"></th>
-                    <th scope="col">Produto</th>
-                    <th scope="col">Qtd</th>
-                    <th scope="col">Preço</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cart.Cart.map((item) => {
-                    return (
-                      <tr key={item.id}>
-                        <th>
-                          <button
-                            onClick={() =>
-                              dispatch(cartActions.DeleteItem(cart, item))
-                            }
-                            className="badge bg-danger"
-                          >
-                            <i className="fas fa-window-close"></i>
-                          </button>
-                        </th>
-                        <th>
-                          <img
-                            className="img-fluid img-thumbnail"
-                            src={item.image}
-                            alt={item.Name}
-                            width="50px"
-                          />
-                        </th>
-                        <th>
-                          <span className="badge badge-pill bg-warning">
-                            {item.quantity}
-                          </span>
-                        </th>
-                        <th>R$ {item.price.toFixed(2)}</th>
-                        <th>
-                          <button
-                            onClick={() =>
-                              dispatch(cartActions.AddItem(cart, item))
-                            }
-                            className="badge badge-pill bg-primary"
-                          >
-                            <i className="fas fa-plus"></i>
-                          </button>
-                        </th>
-                        <th>
-                          <button
-                            onClick={() =>
-                              dispatch(cartActions.RemoveItem(cart, item))
-                            }
-                            className="badge badge-pill bg-danger"
-                          >
-                            <i className="fas fa-minus"></i>
-                          </button>
-                        </th>
-                        <th>R$ {(item.price * item.quantity).toFixed(2)}</th>
-                      </tr>
-                    );
-                  })}
-                  <tr>
-                    <th colSpan="2" scope="col">
-                      Total
-                    </th>
-                    <th colSpan="3">{cart.value} itens</th>
-                    <th colSpan="2">R$ {totalPrice.toFixed(2)}</th>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
+            <Box className="modal-body table-responsive">
+              <Paper>
+                <TableContainer>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell></TableCell>
+                        <TableCell style={{ textAlign: "center", width: 100 }}>
+                          Produto
+                        </TableCell>
+                        <TableCell style={{ textAlign: "center" }}>
+                          Qtd
+                        </TableCell>
+                        <TableCell>Preço</TableCell>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell>Total</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {cart.Cart.map((item) => {
+                        return (
+                          <TableRow key={item.id}>
+                            <TableCell>
+                              <Button
+                                onClick={() =>
+                                  dispatch(cartActions.DeleteItem(cart, item))
+                                }
+                                className="badge bg-danger"
+                              >
+                                <CloseIcon style={{ color: "#f25" }} />
+                              </Button>
+                            </TableCell>
+                            <TableCell
+                              style={{ width: 100, alignItems: "center" }}
+                            >
+                              <img
+                                className="img-fluid img-thumbnail"
+                                src={item.image}
+                                alt={item.Name}
+                                width="50px"
+                              />
+                            </TableCell>
+                            <TableCell style={{ textAlign: "center" }}>
+                              <span className="badge badge-pill bg-warning">
+                                {item.quantity}
+                              </span>
+                            </TableCell>
+                            <TableCell>R$ {item.price.toFixed(2)}</TableCell>
+                            <TableCell>
+                              <Button
+                                onClick={() =>
+                                  dispatch(cartActions.AddItem(cart, item))
+                                }
+                                className="badge badge-pill bg-primary"
+                              >
+                                <i className="fas fa-plus"></i>
+                              </Button>
+                            </TableCell>
+                            <TableCell>
+                              <Button
+                                onClick={() =>
+                                  dispatch(cartActions.RemoveItem(cart, item))
+                                }
+                                className="badge badge-pill bg-danger"
+                              >
+                                <i className="fas fa-minus"></i>
+                              </Button>
+                            </TableCell>
+                            <TableCell>
+                              R$ {(item.price * item.quantity).toFixed(2)}
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                      <TableRow>
+                        <TableCell>Total</TableCell>
+                        <TableCell></TableCell>
+                        <TableCell style={{ textAlign: "center" }}>
+                          {cart.value} itens
+                        </TableCell>
+                        <TableCell colSpan={3}></TableCell>
+                        <TableCell>R$ {totalPrice.toFixed(2)}</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Paper>
+            </Box>
+          </Box>
+        </Box>
       </Modal>
     </>
   );

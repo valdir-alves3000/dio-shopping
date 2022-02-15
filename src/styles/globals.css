@@ -6,6 +6,10 @@
   font-family: "Roboto", sans-serif;
 }
 
+body {
+  background-color: #41414d;
+}
+
 a {
   color: inherit;
   text-decoration: none;

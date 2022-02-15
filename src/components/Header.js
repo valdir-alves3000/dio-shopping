@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import Link from "next/link";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import Link from "next/link";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+
 import Cart from "./Cart";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,33 +18,29 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
-  link: {
-    marginRight: 30,
-    cursor: "pointer",
-  },
 }));
 
-export default function ButtonAppBar() {
-  const [items, setItems] = useState(0);
+const Header = () => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Dio Shopping
           </Typography>
-          <Link href={"/"}>
-            <Typography className={classes.link}>Home</Typography>
+          <Link href="/">
+            <Button color="inherit">Home</Button>
           </Link>
-          <Link href={"/contato"} variant="body2">
-            <Typography className={classes.link}>Contato</Typography>
+          <Link href="/contato">
+            <Button color="inherit">Contato</Button>
           </Link>
-
           <Cart />
         </Toolbar>
       </AppBar>
     </div>
   );
-}
+};
+
+export default Header;

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import {
-  Card,
   CardContent,
   Container,
   CssBaseline,
@@ -8,9 +7,8 @@ import {
   Grid,
   Button,
   TextField,
-  makeStyles,
 } from "@material-ui/core/";
-import Header from "../components/Header";
+import useStyles from "../styles/Contato.style";
 
 const Contatos = () => {
   const url = "http://localhost:5000/message";
@@ -58,38 +56,6 @@ const Contatos = () => {
     setAuthor("");
     setContent("");
   };
-
-  const useStyles = makeStyles((theme) => ({
-    paper: {
-      marginTop: theme.spacing(8),
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-    },
-    form: {
-      width: "100%", // Fix IE 11 issue.
-      marginTop: theme.spacing(1),
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-      width: "100%",
-      marginBottom: 35,
-    },
-    card: {
-      width: 275,
-      margin: 12,
-    },
-
-    title: {
-      fontSize: 14,
-      marginBottom: 12,
-      textAlign: "justify",
-    },
-    text: {
-      marginBottom: 12,
-      color: "#414240",
-    },
-  }));
 
   const classes = useStyles();
   return (

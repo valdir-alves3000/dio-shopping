@@ -3,18 +3,7 @@ import { useSelector } from "react-redux";
 import { Paper, Grid, Typography, List, makeStyles } from "@material-ui/core/";
 import Item from "../components/Item";
 import Card from "../components/Card";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    marginTop: 12,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    margin: theme.spacing(2),
-    textAlign: "center",
-  },
-}));
+import useStyles from "../styles/Home.style";
 
 const HomePage = () => {
   const products = useSelector((state) => state.products);
@@ -45,11 +34,10 @@ const HomePage = () => {
   }
 
   return (
-    <Grid container spacing={3} className={classes.root}>
+    <Grid container spacing={12} className={classes.root}>
       <Grid item xs={3}>
         <Paper className={classes.paper}>
           <Typography variant="h5">Categorias</Typography>
-
           <List>
             {category.map((category) => {
               return (
@@ -63,7 +51,7 @@ const HomePage = () => {
           </List>
         </Paper>
       </Grid>
-      <Grid container xs={9} spacing={3} className={classes.root}>
+      <Grid container xs={9} spacing={3}>
         {products.map((item) => {
           return (
             <Card key={item.id_product} product={item}>

@@ -4,6 +4,7 @@ const HomeStyle = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     marginTop: "90px",
+    marginBottom: "50px",
   },
   paper: {
     position: "fixed",

@@ -1,9 +1,9 @@
-import "../styles/globals.css";
+import { Container } from "@material-ui/core/";
 import Head from "next/head";
 import { Provider } from "react-redux";
-import store from "../components/store";
 import Header from "../components/Header";
-import { Container } from "@material-ui/core/";
+import store from "../components/store";
+import "../styles/globals.css";
 
 function App({ Component, pageProps }) {
   return (
@@ -23,8 +23,8 @@ function App({ Component, pageProps }) {
       </Head>
 
       <Provider store={store}>
-        <Header />
         <Container maxWidth="xl">
+          <Header />
           <Component {...pageProps} />
         </Container>
       </Provider>

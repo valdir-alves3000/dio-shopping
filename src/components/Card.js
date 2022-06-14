@@ -1,9 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
-import { Typography, Button } from "@material-ui/core/";
-import { useSelector, useDispatch } from "react-redux";
-import cartActions from "./store/actions/cart";
+import { Button, Typography } from "@material-ui/core/";
+import { useDispatch, useSelector } from "react-redux";
 import useStyles from "../styles/Card.style.js";
+import cartActions from "./store/actions/cart";
 
 const Card = ({ product, children }) => {
   const cart = useSelector((state) => state.cart.value);

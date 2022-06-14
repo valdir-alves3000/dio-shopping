@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
 import {
+  Button,
   CardContent,
   Container,
   CssBaseline,
-  Typography,
   Grid,
-  Button,
   TextField,
+  Typography,
 } from "@material-ui/core/";
+import { useEffect, useState } from "react";
 import useStyles from "../styles/Contato.style";
 
 const Contatos = () => {

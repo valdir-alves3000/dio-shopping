@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import cartActions from "../store/actions/cart";
 import {
-  Modal,
-  Button,
   Box,
+  Button,
   Grid,
-  Typography,
+  Modal,
   Paper,
-  TableContainer,
-  TableRow,
-  TableCell,
-  TableHead,
   Table,
   TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
 } from "@material-ui/core";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import CloseIcon from "@material-ui/icons/Close";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import cartActions from "../store/actions/cart";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
